@@ -1,0 +1,89 @@
+// Function prototypes
+void order_coffee();
+void admin_mode();
+int check_ingredients(int beans, int water, int milk, int chocolate);
+
+// Main function
+int main() {
+    int choice;
+    while (1) {
+        printf("1. Order coffee\n");
+        printf("2. Admin mode\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        if (choice == 1) {
+            order_coffee();
+        } else if (choice == 2) {
+            admin_mode();
+        } else if (choice == 3) {
+            printf("exiting the coffeemaker\n");
+            break;
+        } else {
+            printf("Invalid choice. Try again.\n");
+        }
+    }
+    return 0;
+}
+// Function to check ingredients
+int check_ingredients(int beans, int water, int milk, int chocolate) {
+    return beans_quantity>=beans && water_quantity>=water && milk_quantity>=milk && chocolate quantity>=chocolate
+}
+ 
+// Function to order coffee
+void order_coffee() {
+    int choice;
+    double price = 0;
+
+    printf("\nAvailable coffee types:\n");
+
+    if (check_ingredients(ESPRESSO_BEANS, ESPRESSO_WATER, 0, 0)) {
+        printf("1. Espresso (%.2f AED)\n", ESPRESSO_PRICE);
+    } else {
+        printf("1. Espresso (Unavailable)\n");
+    }
+
+    if (check_ingredients(CAPPUCCINO_BEANS, CAPPUCCINO_WATER, CAPPUCCINO_MILK, 0)) {
+        printf("2. Cappuccino (%.2f AED)\n", CAPPUCCINO_PRICE);
+    } else {
+        printf("2. Cappuccino (Unavailable)\n");
+    }
+
+    if (check_ingredients(MOCHA_BEANS, MOCHA_WATER, MOCHA_MILK, MOCHA_CHOCOLATE)) {
+        printf("3. Mocha (%.2f AED)\n", MOCHA_PRICE);
+    } else {
+        printf("3. Mocha (Unavailable)\n");
+    }
+
+    printf("0. Cancel\n");
+    printf("Choose a coffee: ");
+    scanf("%d", &choice);
+
+    if (choice == 0) return;
+
+    if (choice == 1 && check_ingredients(ESPRESSO_BEANS, ESPRESSO_WATER, 0, 0)) {
+        price = ESPRESSO_PRICE;
+        beans_quantity -= ESPRESSO_BEANS;
+        water_quantity -= ESPRESSO_WATER;
+    } else if (choice == 2 && check_ingredients(CAPPUCCINO_BEANS, CAPPUCCINO_WATER, CAPPUCCINO_MILK, 0)) {
+        price = CAPPUCCINO_PRICE;
+        beans_quantity -= CAPPUCCINO_BEANS;
+        water_quantity -= CAPPUCCINO_WATER;
+        milk_quantity -= CAPPUCCINO_MILK;
+    } else if (choice == 3 && check_ingredients(MOCHA_BEANS, MOCHA_WATER, MOCHA_MILK, MOCHA_CHOCOLATE)) {
+        price = MOCHA_PRICE;
+        beans_quantity -= MOCHA_BEANS;
+        water_quantity -= MOCHA_WATER;
+        milk_quantity -= MOCHA_MILK;
+        chocolate_quantity -= MOCHA_CHOCOLATE;
+    } else {
+        printf("Selected coffee is unavailable.\n");
+        return;
+    }
+
+    printf("Pay %.2f AED\n", price);
+    total_amount += price;
+    printf("Enjoy your coffee\n");
+}
+// Admin mode
